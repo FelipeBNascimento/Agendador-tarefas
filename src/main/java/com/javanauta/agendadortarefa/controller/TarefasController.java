@@ -2,6 +2,7 @@ package com.javanauta.agendadortarefa.controller;
 
 import com.javanauta.agendadortarefa.business.dto.TarefasDto;
 import com.javanauta.agendadortarefa.business.service.TarefasService;
+import com.javanauta.agendadortarefa.infraesctruture.enums.TarefasEnums;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cglib.core.Local;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +44,28 @@ public class TarefasController {
                                                                      (iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dataFinal) {
 
         return ResponseEntity.ok(service.buscarPorDatas(dataInicio, dataFinal));
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> apagarpeloId(@RequestParam("id") String id){
+
+        service.apagarTarefas(id);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PatchMapping
+    public ResponseEntity<TarefasDto> alterarStatus (@RequestParam TarefasEnums status, @RequestParam String id){
+
+        return ResponseEntity.ok(service.alterarStatus(status, id));
+
+    }
+
+    @PutMapping
+    public ResponseEntity<TarefasDto> alterarTarefas(@RequestBody TarefasDto dto,
+                                                     @RequestParam("id") String id){
+
+        return ResponseEntity.ok(service.atualizarTarefas(dto, id));
     }
 
 

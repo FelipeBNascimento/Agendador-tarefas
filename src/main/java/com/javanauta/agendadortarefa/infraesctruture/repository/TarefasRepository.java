@@ -15,5 +15,4 @@ public interface TarefasRepository extends MongoRepository<TarefasEntity, String
 
     List<TarefasEntity> findByDataEventoBetween(LocalDateTime datainicial, LocalDateTime datafinal);
 
-    //Optional deleteByEmail(String email);
 }
